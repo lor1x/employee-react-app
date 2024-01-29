@@ -31,6 +31,7 @@ export function EmployeeDetails({ employeeId, mode }: EmployeeDetailsProps) {
   const employee = useEmployeeStore(
     (state) => state.employees[employeeId ?? 0]
   );
+  const updateEmployee = useEmployeeStore((state) => state.updateEmployee);
   const toggleModal = useEmployeeStore((state) => state.setIsOpen);
 
   const { name, hourlyWage, maxHoursPerWeek, paidHours }: Employee = employee;
@@ -45,7 +46,7 @@ export function EmployeeDetails({ employeeId, mode }: EmployeeDetailsProps) {
       paidHours: e?.target[3].value,
     };
 
-    console.log(updatedEmployee);
+    updateEmployee(updatedEmployee.id, updatedEmployee);
     alert("Changes saved succesfully!");
     toggleModal();
   };
